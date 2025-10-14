@@ -1,4 +1,4 @@
-# Document of lilcaSoundDriverFC
+# lilcaSoundDriverFC 仕様書
 
 ## 基礎知識
 
