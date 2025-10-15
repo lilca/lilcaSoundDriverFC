@@ -25,7 +25,6 @@
    "1"を超えると音符や休符を1フレーム長くして調整している
 ```
 
-
 ## ステートメント
 
 ### メタ
@@ -62,7 +61,10 @@ Meta Value = "lilca reload"
 - 定義
 
 ```
- <> "=" "{" <Number>+  "}"
+ <Macro> ::= "@" <Macro Name> <M_Number> "=" "{" <NumberList> "}"
+ <NumberList> ::= <Number>+                -- ループなし
+               |  <Number>+ "|" <Number>+  -- ループあり
+               |  "|" <Number>+            -- 冒頭からループ
 ```
 
 ### チャンネル
