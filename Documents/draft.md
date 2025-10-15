@@ -61,10 +61,27 @@ Meta Value = "lilca reload"
 - 定義
 
 ```
- <Macro> ::= "@" <Macro Name> <M_Number> "=" "{" <NumberList> "}"
+ <Macro> ::= "@" <MacroName> <M_Number> "=" "{" <NumberList> "}"
+
  <NumberList> ::= <Number>+                -- ループなし
                |  <Number>+ "|" <Number>+  -- ループあり
                |  "|" <Number>+            -- 冒頭からループ
+               |  <Delay> <Speed> <Depth>  -- ビブラートのとき
+
+ <MacroName> ::= "v" | "@" | "en" | "ep" | "mp"
+
+ <M_Number>  ::= 0-127
+              |  0-63           -- ビブラートのとき
+
+ <Number>    ::=    0 ~ 15      -- ボリューム
+              |     0 ~ 3       -- 音色
+              |  -127 ~ 126     -- アルペジオ
+              |  -127 ~ 126     -- ピッチ
+
+ <Delay> ::= 0 ~ 255
+ <Speed> ::= 1 ~ 255
+ <Depth> ::= 0 ~ 255
+
 ```
 
 ### チャンネル
