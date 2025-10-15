@@ -40,7 +40,7 @@
 #### いずれのメタ情報もキーワード直後の区切り文字以降の文字列を前後トリミングして値とする
 
 ```
-";#COMPOSER   lilca reload   "
+"#COMPOSER   lilca reload   "
 
 Meta Value = "lilca reload"
 ```
