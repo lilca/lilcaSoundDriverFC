@@ -1,6 +1,5 @@
 <h1 style="font-size:5em;">lilcaSoundDriverFC 仕様書<h1>
 
-
 # メタ情報
 
 ### 変換されたコードのコメントとして出力されます
