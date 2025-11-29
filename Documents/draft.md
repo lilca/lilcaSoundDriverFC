@@ -1,5 +1,14 @@
 <h1 style="font-size:5em;">lilcaSoundDriverFC 仕様書<h1>
 
+# 負荷
+```
+ VBlink : 20 x 341 = 6820[cyc]
+ OAM転送 : 512[cyc]
+
+ サウンドドライバ: 820 + 55 x 2 [cyc]
+ 曲のデータサイズ: 159[byte](The Theme of lilca)
+```
+
 # メタ情報
 
 ### 変換されたコードのコメントとして出力されます
