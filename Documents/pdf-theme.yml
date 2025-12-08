@@ -1,0 +1,13 @@
+font:
+  catalog:
+    ipaexg:
+      normal: ipaexg.ttf
+    ipaexm:
+      normal: ipaexm.ttf
+
+  fallback:
+    - ipaexg
+    - ipaexm
+
+base:
+  font-family: ipaexg
