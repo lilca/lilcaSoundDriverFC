@@ -6,3 +6,6 @@
 - DPCM(技術的に事前学習が必要)
 - マクロ(ボリューム、トーン実装予定
 - マクロ(アルペジオ、ビブラートは検討中、ピッチ後回し)
+
+## License
+This project is licensed under the MIT License.
