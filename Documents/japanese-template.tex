@@ -1,0 +1,89 @@
+\documentclass{ltjsarticle}
+
+% 日本語設定
+\usepackage{luatexja}
+\usepackage{luatexja-fontspec}
+
+% IPAex フォント
+\setmainfont[Path=./fonts/]{ipaexg.ttf}
+\setsansfont[Path=./fonts/]{ipaexg.ttf}
+\setmonofont[Path=./fonts/]{ipaexg.ttf}
+
+% LuaTeX-ja 拡張設定
+\ltjsetparameter{jacharrange={-2}}
+
+% Pandoc が生成するリスト密度調整用
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% 一般パッケージ
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{url}
+
+\usepackage{longtable,booktabs,array}
+\newcounter{none}
+
+
+% ページ設定
+$if(geometry)$
+\usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
+$else$
+\usepackage[a4paper,margin=25mm]{geometry}
+$endif$
+
+% 行間
+$if(linestretch)$
+\usepackage{setspace}
+\setstretch{$linestretch$}
+$endif$
+
+% 目次
+$if(toc)$
+\setcounter{tocdepth}{$toc-depth$}
+$endif$
+
+\begin{document}
+
+% タイトル
+$if(title)$
+\title{$title$}
+$endif$
+
+$if(author)$
+\author{$for(author)$$author$$sep$ \\ $endfor$}
+$endif$
+
+$if(date)$
+\date{$date$}
+$else$
+\date{}
+$endif$
+
+$if(title)$
+\maketitle
+$endif$
+
+% 概要
+$if(abstract)$
+\begin{abstract}
+$abstract$
+\end{abstract}
+$endif$
+
+% 目次
+$if(toc)$
+\tableofcontents
+\clearpage
+$endif$
+
+% 本文
+$body$
+
+% 参考文献
+$if(bibliography)$
+\bibliographystyle{plain}
+\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+$endif$
+
+\end{document}

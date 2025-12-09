@@ -1,4 +1,8 @@
-<h1 style="font-size:5em;">lilcaSoundDriverFC 仕様書<h1>
+---
+title: "lilcaSoundDriverFC 仕様書"
+author: "lilca reload(Masayuki Ise)"
+date: "2025-12-08"
+---
 
 # 負荷
 ```

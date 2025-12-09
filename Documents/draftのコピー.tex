@@ -1,0 +1,494 @@
+\documentclass{ltjsarticle}
+
+% 日本語設定
+\usepackage{luatexja}
+\usepackage{luatexja-fontspec}
+
+% IPAex フォント
+\setmainfont{IPAexGothic}
+\setsansfont{IPAexGothic}
+\setmonofont{IPAexGothic}
+
+% LuaTeX-ja 拡張設定
+\ltjsetparameter{jacharrange={-2}}
+
+% Pandoc が生成するリスト密度調整用
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% 一般パッケージ
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{url}
+
+\usepackage{longtable,booktabs,array}
+\newcounter{none}
+
+
+% ページ設定
+\usepackage[a4paper,margin=25mm]{geometry}
+
+% 行間
+
+% 目次
+
+\begin{document}
+
+% タイトル
+
+
+\date{}
+
+
+% 概要
+
+% 目次
+
+% 本文
+lilcaSoundDriverFC 仕様書
+
+\section{負荷}\label{ux8ca0ux8377}
+
+\begin{verbatim}
+ VBlink : 20 x 341 = 6820[cyc]
+ OAM転送 : 512[cyc]
+
+ サウンドドライバ: 820 + 55 x 2 [cyc]
+ 曲のデータサイズ: 159[byte](The Theme of lilca)
+\end{verbatim}
+
+\section{メタ情報}\label{ux30e1ux30bfux60c5ux5831}
+
+\subsubsection{変換されたコードのコメントとして出力されます}\label{ux5909ux63dbux3055ux308cux305fux30b3ux30fcux30c9ux306eux30b3ux30e1ux30f3ux30c8ux3068ux3057ux3066ux51faux529bux3055ux308cux307eux3059}
+
+\begin{itemize}
+\tightlist
+\item
+  書式
+\end{itemize}
+
+\begin{verbatim}
+ #<META_NAME> <string>
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  FC側で使う可能性のあるメタ情報
+\end{itemize}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ccl@{}}
+\toprule\noalign{}
+項目 & キーワード & 備考 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+曲名 & \#TITLE & \\
+作曲者 & \#COMPOSER & \\
+プログラマ & \#PROGRAMER & MMLやサウンドデータに起こした人 \\
+ラベル & \#LABEL & プログラム上で使われるラベル名(*1) \\
+\end{longtable}
+}
+
+(*1 mck mmlの仕様にない)
+
+\subsubsection{いずれのメタ情報もキーワード直後の区切り文字以降の文字列を前後トリミングして値とする}\label{ux3044ux305aux308cux306eux30e1ux30bfux60c5ux5831ux3082ux30adux30fcux30efux30fcux30c9ux76f4ux5f8cux306eux533aux5207ux308aux6587ux5b57ux4ee5ux964dux306eux6587ux5b57ux5217ux3092ux524dux5f8cux30c8ux30eaux30dfux30f3ux30b0ux3057ux3066ux5024ux3068ux3059ux308b}
+
+\begin{verbatim}
+例:
+ "#COMPOSER   lilca reload   "
+
+ Meta Value = "lilca reload"
+\end{verbatim}
+
+\section{マクロ}\label{ux30deux30afux30ed}
+
+\begin{itemize}
+\tightlist
+\item
+  一覧
+\end{itemize}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1053}}
+  >{\centering\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1579}}
+  >{\centering\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1579}}
+  >{\centering\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1579}}
+  >{\centering\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1579}}
+  >{\centering\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1579}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1053}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+マクロ名
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+定義
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+使用
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+ループ指定
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+終端子
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+有効チャンネル
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+備考
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+ボリューム & @v {[}n{]} & @v {[}n{]} & あり(*2) & - & 12N (*1) &
+フレーム単位でボリュームを変化させる \\
+音色 & @{[}n{]} & @@{[}n{]} & あり(*2) & - & 12N (*1) &
+フレーム単位で音色を変化させる \\
+アルペジオ(*3) & @EN {[}n{]} & EN{[}n{]} & あり(*2) & ENOF & 12TN (*1) &
+フレーム単位で音階を変化させる \\
+ピッチ(*3) & @EP {[}n{]} & EP0 & あり(*2) & EPOF & 12TN (*1) &
+フレーム単位で指定方向と量で音階を変化させる \\
+ビブラート(*3) & @MP {[}n{]} & MP{[}n{]} & - & MPOF & 12TN (*1) &
+指定された周期と振幅のSin波で音階を変化させる \\
+DPCM割り当て(*3) & @DPCM {[}n{]} & 音階 & - & - & D (*1) &
+n=0,1,2,3,4\ldots{}-\textgreater{} c,c+,d,d+,e\ldots{}に割り当て \\
+\end{longtable}
+}
+
+*1 チャンネル名: 1=矩形波1, 2=矩形波2, T=三角波, N=ノイズ波, D=DPCM
+
+*2 ``\textbar{}''以降をループする
+
+*3 未対応
+
+\section{マクロパラメータ値}\label{ux30deux30afux30edux30d1ux30e9ux30e1ux30fcux30bfux5024}
+
+\subsection{マクロ値}\label{ux30deux30afux30edux5024}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ccl@{}}
+\toprule\noalign{}
+ビット & 範囲 & 説明 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1000-0000 & -128 & ループバックシンボル(次の1バイトが戻る値) \\
+1000-00010111-1110 & -127 \textasciitilde{} 126 & マクロ値 \\
+0111-1111 & 127 & 未使用 \\
+\end{longtable}
+}
+
+\subsection{ボリューム, 音色, アルペジオ,
+ピッチ共通}\label{ux30dcux30eaux30e5ux30fcux30e0-ux97f3ux8272-ux30a2ux30ebux30daux30b8ux30aa-ux30d4ux30c3ux30c1ux5171ux901a}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+値
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+範囲
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+説明
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+ボリューム値 & 0\textasciitilde15 & \\
+音色 & 0\textasciitilde3 & 矩形波=duty比ノイズ波=ノイズモード \\
+相対音階 & -127\textasciitilde126 & cに対して1 は c+-1 は b \\
+増減値 & -127\textasciitilde126 & 矩形波と三角波 -\textgreater{}
+11bitタイマーノイズ波 -\textgreater{} 4bitピリオド \\
+\end{longtable}
+}
+
+\begin{verbatim}
+ @v0={ 15 8 4 2 0}  ; 1フレーム目 15 ... 5フレーム目 0 それ以降 0
+ @v1={ 15 |8 4 }    ; １フレーム目 15, 2フレーム目 8, 3フレーム目 4, それ以降 8と4を繰り返す
+ @v2={|15 15 12 11 10 8 8 8 } ; '|' 以降の数値を繰り返す
+ @ep0={2 |4 0}  ; 1フレーム目 +2, 2フレーム目 +6, 3フレーム目 +6, 以降 4,0増加させる (*)
+ @ep1={-16}; 1フレーム目 変化なし, 2フレーム目 16減少, 3フレーム目 さらに16減少, 以降 16現状させる(*)
+\end{verbatim}
+
+(* 最大値を超えたら最大値に、最小値を下回ったら最小値にする)
+
+\subsection{ビブラート}\label{ux30d3ux30d6ux30e9ux30fcux30c8}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+値
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+範囲
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+説明
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+遅延 & 0\textasciitilde255 & Sin波を適用するまでのフレーム数 \\
+速さ & 1\textasciitilde255 & Sin波の周期 \\
+深さ & 0\textasciitilde255 & Sin波の振幅矩形波と三角波 -\textgreater{}
+11bitタイマーノイズ波 -\textgreater{} 4bitピリオド \\
+\end{longtable}
+}
+
+\begin{verbatim}
+@mp={4 8 6} ; 4フレーム変化ないし,それ以降 周期8フレーム, 振幅6のSin波を適用する
+\end{verbatim}
+
+\subsection{DPCM}\label{dpcm}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+値
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+範囲
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+説明
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+ファイルパス & 文字列 & 実行ディレクトリからの相対パス \\
+パラメータ１ & 0\textasciitilde15 & ピッチ 15=ノーマル
+(*)\(4010 b3-0のRate Index|
+|パラメータ2|0~4081|再生するブロック数(16byte単位)<br>0または省略時=ファイルサイズ (*)|
+|パラメータ3|0~15|出力レベル(波形のスタート地点) (*)<br>\)FF
+推奨この値から波形が増減する \\
+パラメータ4 & 0\textasciitilde2 & 再生モード (*)0=1ショット, 1=ループ \\
+\end{longtable}
+}
+
+(* 後方省略可能だが、中間のパラメータは省略できない)
+
+\begin{itemize}
+\tightlist
+\item
+  (著者用のメモ)
+\end{itemize}
+
+\begin{verbatim}
+ <Macro> ::= "@" <MacroName> <M_Number> "=" "{" <NumberList> "}"
+
+ <NumberList> ::= <Number>+                -- ループなし
+               |  <Number>+ "|" <Number>+  -- ループあり
+               |  "|" <Number>+            -- 冒頭からループ
+               |  <Delay> <Speed> <Depth>  -- ビブラートのとき
+
+ <MacroName> ::= "v" | "@" | "en" | "ep" | "mp"
+
+ <M_Number>  ::= 0-127
+              |  0-63           -- ビブラートのとき
+
+ <Number>    ::=    0 ~ 15      -- ボリューム
+              |     0 ~ 3       -- 音色
+              |  -127 ~ 126     -- アルペジオ
+              |  -127 ~ 126     -- ピッチ
+
+ <Delay> ::= 0 ~ 255
+ <Speed> ::= 1 ~ 255
+ <Depth> ::= 0 ~ 255
+\end{verbatim}
+
+\section{チャンネル}\label{ux30c1ux30e3ux30f3ux30cdux30eb}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}cc@{}}
+\toprule\noalign{}
+チャンネル名 & シンボル \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+矩形波チャンネル1 & A \\
+矩形波チャンネル2 & B \\
+三角波チャンネル & C \\
+ノイズチャンネル & D \\
+DPCMチャンネル & E \\
+\end{longtable}
+}
+
+\section{内部フォーマット(構文解析のみ)}\label{ux5185ux90e8ux30d5ux30a9ux30fcux30deux30c3ux30c8ux69cbux6587ux89e3ux6790ux306eux307f}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+コマンド値
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+意味
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+サイズ
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+備考
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\$0\_ nn ff & 音符 & nn = ノート番号 ff = フレーム数(*1) & \\
+\$1m ff & 休符 & m = モード(0=音止める, other=音止めない) ff =
+フレーム数(*1) & \\
+\$2v & 音量 & v = 音量値(0-15) & \\
+\$3t & 音色 & t = 音色: 矩形波(0-3) ノイズ(0-1) & \\
+\$4\_ pp pp & ピッチ & pppp = ピッチ量(-32768\textasciitilde32767)(*3)
+& \\
+\$5o & オクターブ & o = オクターブ値(0-5 =\textgreater{} o2-o7) & \\
+\$6\_ & オクターブUP & 引数なし & \\
+\$7\_ & オクターブDOWN & 引数なし & \\
+\$80(*4) & ボリュームマクロ & マクロ番号 & (*2) \\
+\$81 & 音色マクロ & マクロ番号 & (*2) \\
+\$82 & アルペジオマクロ開始 & マクロ番号 & (*2) \\
+\$83 & ピッチマクロ & マクロ番号 & (*2) \\
+\$84 & ビブラートマクロ開始 & マクロ番号 & (*2) \\
+\$8C & アルペジオマクロ終了 & なし & \\
+\$8D & ピッチマクロ終了 & なし & \\
+\$8E & ビブラートマクロ終了 & なし & \\
+\(A_        | リピート開始    | なし(リピートカウントに\)FFを設定) & &
+& \\
+\$Br & リピート終了 & r = リピート回数(0-15) & \\
+\$FF & 終端子 & 引数なし & \\
+\end{longtable}
+}
+
+\begin{verbatim}
+廃止
+| $80<br>(無くなるかも)| ボリュームマクロ | マクロ番号 | (*2) |
+| $81        | 音色マクロ     | マクロ番号 | (*2) |
+| $82        | アルペジオマクロ開始 | マクロ番号 | (*2) |
+| $83        | ピッチマクロ    | マクロ番号 | (*2) |
+| $84        | ビブラートマクロ開始 | マクロ番号 | (*2) |
+| $92        | アルペジオマクロ終了 | なし | |
+| $93        | ピッチマクロ終了 | なし | |
+| $94        | ビブラートマクロ終了 | なし |
+\end{verbatim}
+
+*1 省略時は ``-1'' が入る
+
+*2 バイナリ変換時に番号は振り直すのでmmlの番号とは一致しない
+
+*3 ピッチ量は通常0
+
+*4 \(D0~\)DFは
+
+\section{音階}\label{ux97f3ux968e}
+
+\begin{itemize}
+\tightlist
+\item
+  音階n: C1=0 - A8=93
+\end{itemize}
+
+\begin{verbatim}
+ a4の周波数 = 440
+ 周波数f: = 440 x 2 xx (n / 12)
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  算出式
+\end{itemize}
+
+\begin{verbatim}
+ f = fn(note, octave)
+   = 440 * 2 ** (( (note-9) + (octave-4) * 12 -  )/12)
+タイマー値T: = -1 + 1789773 / 16 / f
+\end{verbatim}
+
+\section{長さ(音符, 休符)}\label{ux9577ux3055ux97f3ux7b26-ux4f11ux7b26}
+
+\begin{itemize}
+\tightlist
+\item
+  定義
+\end{itemize}
+
+\begin{verbatim}
+ テンポ t (例 = 160)
+ 符長 len (例 = 32 = 32分音符)
+
+ * 符長: 音符や休符の長さ
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  定数A
+\end{itemize}
+
+\begin{verbatim}
+ A = 60fps x 60秒 x 4分音符 = 14400
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  符長のフレーム数 F
+\end{itemize}
+
+\begin{verbatim}
+ F =  Int (A / t / len)
+
+ * Int()で切り捨てられた少数点以下の値は累積され、
+   "1"を超えると音符や休符を1フレーム長くして調整している
+\end{verbatim}
+
+\section{デフォルト値}\label{ux30c7ux30d5ux30a9ux30ebux30c8ux5024}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lc@{}}
+\toprule\noalign{}
+項目 & デフォルト値 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+テンポ & 120 \\
+長さ & 4 \\
+ボリューム & 12 \\
+オクターブ & 4 \\
+\end{longtable}
+}
+
+\subsubsection{タイマー値の計算}\label{ux30bfux30a4ux30deux30fcux5024ux306eux8a08ux7b97}
+
+f = clock / (16 *(timer + 1)) timer = clock / (16 x f) - 1
+
+\#\#\#d 未整理メモf ノイズチャンネル @v1=\{12 15 14 14 13 13 \textbar{}
+8 8 8 8 3 3 3 3 0 \} ; 音階 c - b 0-4 5 6 7 8 9 a b c d e f ;\$400E b3-0
+= 0 1 2 3 4 5 6 7 8 9 a b 音階 c d e f g a b 周期 5 6 7 8 9 a b
+0-4,c-fが使えない
+
+\section{参考文献}\label{ux53c2ux8003ux6587ux732e}
+
+\href{https://woolyss.com/chipmusic/chipmusic-mml/ppmck_guide.php}{Ultimate
+PPMCK MML Reference}
+
+\href{https://www.nesdev.org/mck_guide_v1.0.txt}{MCK/MML BEGINNERS
+GUIDE}
+
+% 参考文献
+
+\end{document}

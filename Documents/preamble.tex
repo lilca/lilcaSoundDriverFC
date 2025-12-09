@@ -1,0 +1,32 @@
+% preamble.tex
+\usepackage{xeCJK}
+\setCJKmainfont{Hiragino Kaku Gothic ProN}    % 本文
+\setCJKmonofont{Hiragino Kaku Gothic ProN}    % コードブロック
+\setCJKfamilyfont{maru}{Hiragino Maru Gothic ProN} % 丸ゴ
+% 左右のマージンを奇数偶数で変える
+\usepackage[twoside,inner=30mm,outer=20mm,top=25mm,bottom=25mm]{geometry}
+\usepackage{amsmath, amssymb} % 数式
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}  % 既存のヘッダー/フッターをクリア
+
+% 章タイトルマークの設定
+\renewcommand{\sectionmark}[1]{\markboth{#1}{#1}}
+
+% 奇数ページ（右）に章タイトル、偶数ページ（左）に章タイトル
+\fancyhead[RO]{\nouppercase{\rightmark}} % Right Odd
+\fancyhead[LE]{\nouppercase{\leftmark}}  % Left Even
+
+% ページ番号は中央下に
+\fancyfoot[RO]{\thepage}
+\fancyfoot[LE]{\thepage}
+
+% １ページ目を右に
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyhead[RO]{\nouppercase{\rightmark}}
+  \fancyhead[LE]{\nouppercase{\leftmark}}
+  \fancyfoot[RO]{\thepage}
+  \fancyfoot[LE]{\thepage}
+}
