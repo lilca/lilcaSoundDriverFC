@@ -4,6 +4,10 @@ author: "lilca reload(Masayuki Ise)"
 date: "2025-12-08"
 ---
 
+# 概要
+- 対象：Famicom / NES 向けサウンドドライバ
+- 記述言語：MML
+
 # 負荷
 ```
  VBlink : 20 x 341 = 6820[cyc]
