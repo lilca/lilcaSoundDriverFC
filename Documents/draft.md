@@ -61,7 +61,7 @@ date: "2025-12-08"
 
 ## 記述方法
 ```
- #<META_KEYWORD> <string>
+ "#" <META_KEYWORD> " " <string>
 ```
 - キーワード直後の区切り文字以降の文字列を前後トリミングした値となる
 
@@ -77,7 +77,7 @@ date: "2025-12-08"
 
 ## 記述方法
 ```
- <Channel Symbol> <MML Statement>
+ <Channel Symbol> " " <MML Statement>
 ```
 
 デフォルト値
