@@ -77,7 +77,7 @@ date: "2025-12-08"
 
 ## 記述方法
 ```
- <Channel Symbol> <" ">+ <MML Statement>
+ <Channel Symbol> <" ">+ <MML Statements>
 ```
 
 デフォルト値
